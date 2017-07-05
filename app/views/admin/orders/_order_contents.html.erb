@@ -1,0 +1,9 @@
+<% order.order_contents.each do |order_contents| %>
+  <tr>
+    <td><%= order_contents.product.id %></td>
+    <td><%= link_to order_contents.product.name, admin_product_path(order_contents.product) %></td>
+    <td><%= order_contents.quantity %></td>
+    <td><%= number_to_currency(order_contents.product.price) %></td>
+    <td><%= number_to_currency(order_contents.value) %></td>
+  </tr>
+<% end %>

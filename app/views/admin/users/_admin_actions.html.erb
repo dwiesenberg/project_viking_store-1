@@ -1,0 +1,6 @@
+<div class="panel">
+	<h4>Admin Actions for <%= @user.name %></h4>
+
+<%=link_to "Create Order", new_admin_user_order_path(@user), :class => "btn btn-block btn-default btn-lg btn-primary" %>
+<%= link_to "Create Address", new_admin_user_address_path(@user), :class => "btn btn-block btn-default btn-lg btn-primary" %>
+</div>

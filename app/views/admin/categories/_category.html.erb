@@ -1,0 +1,7 @@
+<tr>
+  <td><%= category.id %></td>
+  <td><%= link_to category.name, [:admin, category] %></td>
+  <td><%= link_to "show", show_admin_category_path(category)%></td>
+  <td><%= link_to "edit", edit_admin_category_path(category) %></td>
+  <td><%= link_to "delete", [:admin, category], :method => :delete, :data => { confirm: "Are you sure?" } %></td>
+</tr>

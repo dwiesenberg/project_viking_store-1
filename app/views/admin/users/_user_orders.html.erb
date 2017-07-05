@@ -1,0 +1,11 @@
+<% orders.each do |order| %>
+	<tr>
+	  <td><%= order.id %></td>
+	  <td><%= order.created_at %></td>
+	  <td><%= number_to_currency(order.value) %></td>
+	  <td><%= order_status(order) %></td>
+	  <td><%= link_to "show", admin_user_order_path(order.user_id, order.id) %></td>
+  	<td><%= link_to "edit", edit_admin_user_order_path(order.user_id, order.id) %></td>
+	  <td><%= link_to "delete", admin_user_order_path(order.user_id, order.id), :method => :delete, :data => { confirm: "Are you sure?" } %></td>
+	</tr>
+<% end %>

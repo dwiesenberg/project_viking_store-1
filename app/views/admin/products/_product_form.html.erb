@@ -1,0 +1,51 @@
+<div class="row">
+  <div class="col-md-6">
+    <%= render "admin/shared/errors", :object => product %>
+
+    <%= form_for [:admin, product], {:html => {:class => "form-horizontal" }} do |f| %>
+      <h3><%= form_type %> product</h3>
+      
+      <div class="form-group">
+        <%= f.label "Product ID:", :class => "col-md-3 control-label" %>
+        <div class="col-md-9">
+          <%= display_if(product.id) %>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <%= f.label :name, :class => "col-md-3 control-label" %>
+        <div class="col-md-9">
+          <%= f.text_field :name, placeholder: "enter the product name here", :class => "form-control" %>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <%= f.label :price, :class => "col-md-3 control-label" %>
+        <div class="col-md-9">
+          <div class="input-group">
+            <span class="input-group-addon">$</span>
+            <%= f.text_field :price, placeholder: "enter the price here", :class => "form-control" %>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <%= f.label :sku, :class => "col-md-3 control-label" %>
+        <div class="col-md-9">
+          <%= f.text_field :sku, placeholder: "enter the sku here", :class => "form-control" %>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <%= f.label :category_id, :class => "col-md-3 control-label" %>
+        <div class="col-md-9">
+          <%= f.collection_select :category_id, Category.all, :id, :name, {}, :class => "form-control" %>
+        </div>
+      </div>
+
+      <%= f.submit submit(form_type, "Product"), :class => "btn btn-large btn-primary btn-block" %>
+    <% end %>
+
+    <%= (link_to "Delete Product", admin_product_path(@product), :method => :delete, :data => { confirm: "Are you sure?" }) if product.id %>
+  </div>
+</div>

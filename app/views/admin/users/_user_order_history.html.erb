@@ -1,0 +1,21 @@
+<div class="panel">
+  <h4>Order History</h4>
+  <table class="table table-striped table-bordered">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Order Date</th>
+        <th>Order Value</th>
+        <th>STATUS</th>
+        <th>SHOW</th>
+        <th>EDIT</th>
+        <th>DELETE</th>
+      </tr>
+    </thead>
+    <tbody>
+
+      <%= render 'user_orders',  orders: @user.orders%>
+
+    </tbody>
+  </table>
+</div>

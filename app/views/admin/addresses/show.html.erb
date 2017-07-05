@@ -1,0 +1,14 @@
+<h3><%= @user.name %>'s Address</h3>
+<p>Owner ID: <%= @user.id %></p>
+<p>Owner Name: <%= link_to @user.name, admin_user_path(@user) %></p>
+<p>Street: <%= @address.street_address %></p>
+<p>City: <%= @address.city.name %></p>
+<p>State: <%= @address.state.name %></p>
+
+<%= link_to "Edit Address",
+		edit_admin_user_address_path(@user.id, @address.id) %><br>
+
+<%= link_to "Delete Address",
+		admin_user_address_path(@user.id, @address.id),
+		:method => :delete,
+		:data => { confirm: "Are you sure?" } %>

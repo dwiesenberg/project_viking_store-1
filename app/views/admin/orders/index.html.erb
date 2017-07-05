@@ -1,0 +1,28 @@
+<h2><%= index_title(@user, "Orders") %></h2>
+<div class="panel">
+  <%= index_order_create(@user) %>
+
+  <table class="table table-striped table-bordered">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>User ID</th>
+        <th>Address</th>
+        <th>City</th>
+        <th>State</th>
+        <th>Total Quantity</th>
+        <th>Total Value</th>
+        <th>Status</th>
+        <th>Date Placed</th>
+        <th>SHOW</th>
+        <th>EDIT</th>
+        <th>DELETE</th>
+      </tr>
+    </thead>
+    <tbody>
+
+      <%= render @orders %>
+
+    </tbody>
+  </table>
+</div>

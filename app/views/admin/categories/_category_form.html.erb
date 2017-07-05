@@ -1,0 +1,27 @@
+<div class="row">
+  <div class="col-md-6">
+    <%= render "admin/shared/errors", :object => category %>
+
+    <%= form_for [:admin, category], {:html => {:class => "form-horizontal" }} do |f| %>
+
+      <h3><%= form_type %> Category</h3>
+
+      <div class="form-group">
+        <%= f.label "Category ID:", :class => "col-md-3 control-label" %>
+        <div class="col-md-9">
+          <%= display_if(category.id) %>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <%= f.label :name, :class => "col-md-3 control-label" %>
+        <div class="col-md-9">
+          <%= f.text_field :name, placeholder: "enter the category name here", :class => "form-control" %>
+        </div>
+      </div>
+
+      <%= f.submit submit(form_type, "Category"), :class => "btn btn-large btn-primary btn-block" %>
+    <% end %>
+    <%= (link_to "Delete Category", admin_category_path(@category), :method => :delete, :data => { confirm: "Are you sure?" }) if category.id %>
+  </div>
+</div>

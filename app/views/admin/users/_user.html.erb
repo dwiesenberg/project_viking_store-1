@@ -1,0 +1,11 @@
+<tr>
+  <td><%= user.id %></td>
+  <td><%= link_to user.name, [:admin, user] %></td>
+  <td><%= user.created_at %></td>
+  <td><%= user.billing_id.nil? ? "N/A" : user.billing_address.city.name %></td>
+  <td><%= user.billing_id.nil? ? "N/A" : user.billing_address.state.name %></td>
+  <td><%= user.completed_orders.count %></td>
+  <td><%= user.last_checkout_date %></td>
+  <td><%= link_to "edit", edit_admin_user_path(user) %></td>
+  <td><%= link_to "delete", [:admin, user], :method => :delete, :data => { confirm: "Are you sure?" } %></td>
+</tr>

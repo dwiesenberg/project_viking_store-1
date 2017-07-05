@@ -1,0 +1,20 @@
+<h2>Products</h2>
+
+<%= link_to "Add a New Product", new_admin_product_path, :class => "btn btn-large btn-primary btn-block", :role => "button" %>
+
+<table class="table table-striped table-bordered">
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Name</th>
+      <th>Price</th>
+      <th>Category</th>
+      <th>SHOW</th>
+      <th>EDIT</th>
+      <th>DELETE</th>
+    </tr>
+  </thead>
+  <tbody>
+    <%= render @products %>
+  </tbody>
+</table>

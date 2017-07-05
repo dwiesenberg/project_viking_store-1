@@ -1,0 +1,63 @@
+<h2><%= order_title(@order) %></h2>
+
+<div class="panel">
+	<%= render "logistical" %>
+	<p>Number Products: <%= @order.quantity %></p>
+	<p>Order Value: <%= number_to_currency(@order.value) %></p>
+	<%= @order.user ? (link_to "Edit Customer Profile", edit_admin_user_path(@order.user)) : "N/A" %>
+	<h4>Order Status</h4>
+	<h3 id="<%= order_status(@order).downcase %>">
+	<%= order_status(@order) %>
+	</h3>
+
+<% if @order.shipping_address %>
+	<h4>Shipping Address</h4>
+	<p>Street: <%= @order.shipping_address.street_address %></p>
+	<p>City: <%= @order.shipping_address.city.name %></p>
+	<p>State: <%= @order.shipping_address.state.name %></p>
+<% end %>
+
+<% if @order.billing_address %>
+	<h4>Billing Address</h4>
+	<p>Street: <%= @order.billing_address.street_address %></p>
+	<p>City: <%= @order.billing_address.city.name %></p>
+	<p>State: <%= @order.billing_address.state.name %></p>
+<% end %>
+
+	<h4>Billing Card</h4>
+	<p>Last four digits: <%= @order.credit_card.card_number if @order.credit_card %></p>
+	<%= link_to "Edit order",
+	    edit_admin_user_order_path(@order.user_id, @order.id) %><br>
+
+	<%= link_to "Delete order",
+	    admin_user_order_path(@order.user_id, @order.id),
+	    :method => :delete,
+	    :data => { confirm: "Are you sure?" } %>
+</div>
+
+<div class="panel">
+	<h3>Order Contents</h3>
+	<table class="table table-striped table-bordered">
+		<thead>
+			<tr>
+				<th>Product ID</th>
+				<th>Product</th>
+				<th>Quantity</th>
+				<th>Price</th>
+				<th>Total Price</th>
+			</tr>
+		</thead>
+
+		<tbody>
+			<%= render "order_contents", :order => @order %>
+		</tbody>
+	</table>
+
+	<%= link_to "Edit order",
+			edit_admin_user_order_path(@order.user_id, @order.id) %><br>
+
+	<%= link_to "Delete order",
+			admin_user_order_path(@order.user_id, @order.id),
+			:method => :delete,
+			:data => { confirm: "Are you sure?" } %>
+</div>

@@ -1,0 +1,14 @@
+<div class="panel">
+  <h4>Credit Card Information</h4>
+
+
+  <% if @user.credit_cards.empty? %>
+    No Credit Card on file
+  <% end %>
+
+  <%= render @user.credit_cards %>
+
+  <%= link_to "delete", "Remove Card" %>
+
+
+</div>

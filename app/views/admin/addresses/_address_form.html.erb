@@ -1,0 +1,60 @@
+<div class="row">
+  <div class="col-md-6">
+    <%= render "admin/shared/errors", :object => address %>
+
+    <%= form_for [:admin, address], {:url => { :action => (address.id ? :update : :create) }, :html => {:class => "form-horizontal" }} do |f| %>
+
+      <h3><%= form_type %> address</h3>
+
+      <div class="form-group">
+        <%= f.label "User ID:", :class => "col-md-4 control-label" %>
+        <div class="col-md-8">
+          <%= address.user_id %>
+        </div>
+        <%= f.hidden_field :user_id %>
+      </div>
+
+      <div class="form-group">
+        <%= f.label :user, :class => "col-md-4 control-label" %>
+        <div class="col-md-8">
+          <%= link_to "#{address.user.name} (Click to view user)", admin_user_path(address.user_id) %>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <%= f.label :street_address, :class => "col-md-4 control-label" %>
+        <div class="col-md-8">
+          <%= f.text_field :street_address, placeholder: "enter street address here", :class => "form-control" %>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <%= f.label :state, :class => "col-md-4 control-label" %>
+        <div class="col-md-8">
+          <%= f.collection_select :state_id, State.all, :id, :name, {}, :class => "form-control" %>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <%= f.label :city, :class => "col-md-4 control-label" %>
+        <div class="col-md-8">
+          <%= f.collection_select :city_id, City.all, :id, :name, {}, :class => "form-control" %>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <%= f.label :zip_code, :class => "col-md-4 control-label" %>
+        <div class="col-md-8">
+          <%= f.text_field :zip_code, placeholder: "enter zip code here", :class => "form-control" %>
+        </div>
+      </div>
+
+      <%= f.submit submit(form_type, "Address"), :class => "btn btn-large btn-primary btn-block" %>
+    <% end %>
+
+    <%= (link_to "Delete Address",
+    admin_user_address_path(address.user_id, address.id),
+    :method => :delete,
+    :data => { confirm: "Are you sure?" }) if address.id %>
+  </div>
+</div>
