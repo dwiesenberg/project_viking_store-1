@@ -8,7 +8,7 @@ class Product < ApplicationRecord
             :presence => true,
             :allow_blank => false,
             :allow_nil => false,
-            :nermericality => {:less_than_or_equal_to => 10_000}
+            :numericality => {:less_than_or_equal_to => 10_000}
 
   validates :name,
             :presence => true,

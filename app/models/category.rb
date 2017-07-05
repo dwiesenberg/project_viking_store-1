@@ -1,5 +1,5 @@
 class Category < ApplicationRecord
-  has_many :products, depndent: :nullify
+  has_many :products
 
   validates :name,
             presence: true,

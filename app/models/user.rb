@@ -21,10 +21,6 @@ class User < ApplicationRecord
             presence: true,
             format: {with:/@/}
 
-  accepts_nested_attributes_for :addresses,
-                                :allow_blank => true,
-                                :reject_if => :allow_blank
-
   def completed_orders
     orders.where.not(checkout_date: nil)
   end
