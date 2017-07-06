@@ -1,6 +1,12 @@
 Project: Viking Store Admin
 ========================
 
+Author: Ann Allan
+
+Cloned to: David Wiesenberg
+
+Github: https://github.com/AnnAllan/project_viking_store
+
 ##To Get Going On This Assignment
 - run `rake db:create`
 - run `rake db:migrate`
