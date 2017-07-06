@@ -6,7 +6,7 @@ class Admin::ProductsController < AdminController
   end
 
   def show
-    @product = Product.find(param[:id])
+    @product = Product.find(params[:id])
   end
 
   def new
@@ -49,6 +49,10 @@ class Admin::ProductsController < AdminController
   end
 
   private
+  def set_product
+    @product = Product.find(params[:id])
+  end
+
   def safe_product_params
     params.require(:product).permit(:name, :sku, :price, :category_id)
   end

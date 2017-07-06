@@ -4,11 +4,11 @@
 
     <%= form_for [:admin, product], {:html => {:class => "form-horizontal" }} do |f| %>
       <h3><%= form_type %> product</h3>
-      
+
       <div class="form-group">
         <%= f.label "Product ID:", :class => "col-md-3 control-label" %>
         <div class="col-md-9">
-          <%= display_if(product.id) %>
+          <%= product.id ? "#{product.id}" : "N/A" %>
         </div>
       </div>
 
@@ -30,20 +30,13 @@
       </div>
 
       <div class="form-group">
-        <%= f.label :sku, :class => "col-md-3 control-label" %>
-        <div class="col-md-9">
-          <%= f.text_field :sku, placeholder: "enter the sku here", :class => "form-control" %>
-        </div>
-      </div>
-
-      <div class="form-group">
         <%= f.label :category_id, :class => "col-md-3 control-label" %>
         <div class="col-md-9">
           <%= f.collection_select :category_id, Category.all, :id, :name, {}, :class => "form-control" %>
         </div>
       </div>
 
-      <%= f.submit submit(form_type, "Product"), :class => "btn btn-large btn-primary btn-block" %>
+      <%= f.submit :class => "btn btn-large btn-primary btn-block" %>
     <% end %>
 
     <%= (link_to "Delete Product", admin_product_path(@product), :method => :delete, :data => { confirm: "Are you sure?" }) if product.id %>

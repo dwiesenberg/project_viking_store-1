@@ -15,6 +15,8 @@ class Order < ApplicationRecord
             presence: true,
             numericality: {is_integer: true}
 
+  accepts_nested_attributes_for :order_contents
+
   def date_placed
     checkout_date && order.id ? checkout_date.strftime("%Y-%m-%d") : nil
   end
@@ -39,9 +41,9 @@ class Order < ApplicationRecord
     where("checkout_date > ?", date.days.ago)
   end
 
-  def self.carts
-    where(checkout_date: nil)
-  end
+  # def self.carts
+  #   where(checkout_date: nil)
+  # end
 
   def self.new_orders(last_x_days = nil)
     if last_x_days
