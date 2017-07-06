@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>VikingStore</title>
+  <!-- Latest compiled and minified CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+
+  <!-- Latest compiled and minified JavaScript -->
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+</head>
+<body>
+
+<div class="container">
+  <h1>Viking Store Analytics Portal</h1>
+  <div class="row">
+    <%= render "admin/shared/admin_navbar" %>
+
+    <section class="col-md-10">
+      <%= render "admin/shared/flashes" %>
+      <%= yield %>
+    </section>
+  </div>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,11 @@
+$dark-grey: #333333;
+$flag-blue: #999999;
+$flag-light-blue: #CCCCCC;
+
+$white: #FFF;
+$orange-accent: #FF9900;
+
+$normal-dark: linear-gradient($flag-blue, $dark-grey);
+$dark-normal: linear-gradient($dark-grey, $flag-blue);
+$light-normal: linear-gradient($flag-light-blue, $flag-blue);
+$normal-light: linear-gradient($flag-blue, $flag-light-blue);

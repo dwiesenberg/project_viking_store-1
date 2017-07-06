@@ -1,0 +1,73 @@
+@import 'colors';
+
+h1 {
+  text-align: center;
+}
+
+.navbar-offset {
+  padding-top: 35px;
+}
+
+nav.navbar{
+  border-bottom: 2px solid black;
+  background-color: #fff;
+  a {
+    color: #000;
+  }
+
+}
+
+#main {
+  margin-top: 15px;
+  padding-top: 15px;
+  border-left: 1px solid #333;
+  border-right: 1px solid #333;
+
+}
+
+#main-footer {
+  background: #333;
+  background-color: #333;
+  color: $white;
+
+  h4 {
+    color: $orange-accent;
+  }
+
+  li {
+    list-style-type: none;
+  }
+  a {
+    color: $white;
+    text-decoration: underline;
+    &:hover {
+      color: $white;
+      background-color: $flag-light-blue;
+    }
+  }
+
+  img {
+    width: 21px;
+    height: 21px;
+  }
+}
+
+button.btn-swedish, input.btn-swedish, a.btn-swedish {
+  background: $normal-dark;
+  color: $white;
+  &:hover {
+    color: $white;
+    background: $light-normal;
+  }
+}
+
+.field_with_errors {
+  * {
+    border-color: red;
+  }
+}
+
+.panel {
+  border: 1px solid $dark-grey;
+  padding:20px;
+}

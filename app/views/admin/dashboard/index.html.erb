@@ -1,0 +1,200 @@
+<div class="col-md-10">
+  <div class="row">
+    <div class="col-md-12">
+      <h3>Viking Store Analytics Dashboard</h3>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-5 panel">
+      <h4>1. Overall Platform</h4>
+
+      <% @time_frames.each do |time_frame| %>
+        <div class="row">
+          <div class="col-md-12">
+            <h5>
+              <%= time_frame ? "Last #{time_frame} Days" : "Total" %>
+            </h5>
+        <%= render partial: "overall",
+                    locals: { users: @new_users[time_frame],
+                              orders: @new_orders[time_frame],
+                              products: @new_products[time_frame],
+                              revenue: @revenue[time_frame]} %>
+          </div>
+        </div>
+      <% end %>
+    </div> <!--PANEL 1-->
+
+    <div class="col-md-5 col-md-offset-1 panel">
+      <h4>2. User Demographics and Behavior</h4>
+      <div class="row">
+        <div class="col-md-12">
+          <h5>Top 3 States users live in</h5>
+          <table class="table table-striped table-bordered">
+            <thead>
+              <tr>
+                <th>Item</th>
+                <th>Data</th>
+              </tr>
+            </thead>
+            <tbody>
+              <% @top_states.each do |entry| %>
+                <tr>
+                  <td><%= entry.state_name %></td>
+                  <td><%= entry.users_in_state %></td>
+                <tr>
+              <% end %>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-12">
+          <h5>Top 3 cities users live in</h5>
+          <table class="table table-striped table-bordered">
+            <thead>
+              <tr>
+                <th>Item</th>
+                <th>Data</th>
+              </tr>
+            </thead>
+            <tbody>
+              <% @top_cities.each do |entry| %>
+                <tr>
+                  <td><%= entry.city_name %></td>
+                  <td><%= entry.users_in_city %></td>
+                <tr>
+              <% end %>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-12">
+          <h5>Top user with...</h5>
+          <table class="table table-striped table-bordered">
+            <thead>
+              <tr>
+                <th>Item</th>
+                <th>User</th>
+                <th>Quantity</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Highest Single Order Value</td>
+                <td>
+                  <%= @top_order.user_first_name + " " + @top_order.user_last_name %>
+                </td>
+                <td>
+                  <%= number_to_currency(@top_order.value) %>
+                </td>
+              </tr>
+              <tr>
+                <td>Highest Lifetime Value</td>
+                <td>
+                  <%= @highest_lifetime.user_first_name + " " + @highest_lifetime.user_last_name %>
+                </td>
+                <td>
+                  <%= number_to_currency(@highest_lifetime.value) %>
+                </td>
+              </tr>
+              <tr>
+                <td>Highest Average Order Value</td>
+                <td>
+                  <%= @highest_average.user_first_name + " " + @highest_average.user_last_name %>
+                </td>
+                <td>
+                  <%= number_to_currency(@highest_average.value) %>
+                </td>
+              </tr>
+              <tr>
+                <td>Most Orders Placed</td>
+                <td>
+                  <%= @most_orders.user_first_name + " " + @most_orders.user_last_name %>
+                </td>
+                <td>
+                  <%= @most_orders.orders_placed %>
+                </td>
+
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div> <!-- Panel 2 -->
+  </div> <!-- first row -->
+
+  <div class="row">
+    <div class="col-md-5 panel">
+      <h4>3. Order Statistics</h4>
+
+      <% @time_frames.each do |time_frame| %>
+        <div class="row">
+          <div class="col-md-12">
+            <h5>
+              <%= time_frame ? "Last #{time_frame} Days" : "Total" %>
+            </h5>
+        <%= render partial: "statistics",
+                    locals: { new_orders: @new_orders[time_frame],
+                              revenue: @revenue[time_frame],
+                              largest_order: @largest_order[time_frame]} %>
+          </div>
+        </div>
+      <% end %>
+
+    </div> <!-- PANEL 3 -->
+
+    <div class="col-md-5 col-md-offset-1 panel">
+      <h4>4. Time Series Data</h4>
+      <div class="row">
+        <div class="col-md-12">
+          <h5>Orders by day</h5>
+          <table class="table table-striped table-bordered">
+            <thead>
+              <tr>
+                <th>Date</th>
+                <th>Quantity</th>
+                <th>Value</th>
+              </tr>
+            </thead>
+            <tbody>
+              <% @order_days.each_with_index do |entry, index| %>
+                <tr>
+                  <td><%= (Time.now - index.day).strftime("%m/%d") %></td>
+                  <td><%= entry %></td>
+                  <td><%= number_to_currency(@daily_revenue[index]) %></td>
+                <tr>
+              <% end %>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-12">
+          <h5>Orders by week</h5>
+          <table class="table table-striped table-bordered">
+            <thead>
+              <tr>
+                <th>Week Of</th>
+                <th>Quantity</th>
+                <th>Value</th>
+              </tr>
+            </thead>
+            <tbody>
+              <% @order_weeks.each_with_index do |entry, index| %>
+                <tr>
+                  <td><%= (Time.now.midnight - Time.now.wday - (7 * index).days).strftime("%m/%d") %></td>
+                  <td><%= entry %></td>
+                  <td><%= number_to_currency(@weekly_revenue[index]) %></td>
+                <tr>
+              <% end %>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div> <!--PANEL 4 -->
+  </div> <!--Second Row -->
+</div>

@@ -72,7 +72,7 @@ class Order < ApplicationRecord
     where(:checkout_date => (starting_sunday..(starting_sunday + 7.days))).size
   end
 
-  def weekly_revenue(weeks_ago)
+  def self.weekly_revenue(weeks_ago)
     starting_sunday = Time.now.midnight - Time.now.wday - (7 * weeks_ago).days
     joins("JOIN order_contents ON orders.id = order_contents.order_id JOIN products ON order_contents.product_id = products.id").where(:checkout_date => (starting_sunday..(starting_sunday + 7.days))).sum("(order_contents.quantity * products.price)")
   end
@@ -80,31 +80,25 @@ class Order < ApplicationRecord
   private
 
   def self.largest_value_since(date)
-    result = select("orders.id, SUM(order_contents.quantity * products.price) AS value").
-      joins("JOIN order_contents ON orders.id = order_contents.order_id JOIN products ON products.id = order_conents.product_id").
-      where("checkout_date > ?", date.days.ago).
-      order("value DESC").
-      group("orders.id").
-      first
-      first ? first.value : 0
+   select("orders.id, SUM(order_contents.quantity * products.price) AS value").
+     from("orders").
+     joins("JOIN order_contents ON orders.id = order_contents.order_id JOIN products ON products.id = order_contents.product_id").
+     where("checkout_date > ?", date.days.ago).
+     order("value DESC").
+     group("orders.id").
+     first
+     first ? first.value : 0
   end
 
   def self.all_time_largest_value
-    result = select("orders.id, SUM(order_conents.quantity * products.price) AS value").
-      joins("JOIN order_contents ON orders.id = order_conents.order_id JOIN products ON products.id = order_conents.product_id").
-      where("checkout_date IS NOT NULL").
-      order("value DESC").
-      group("orders.id").
-      first
-      first ? first.value : 0
+    "commented out"
+    # select("orders.id, SUM(order_conents.quantity * products.price) AS value").
+    #   from("orders").
+    #   joins("JOIN order_contents ON orders.id = order_conents.order_id JOIN products ON products.id = order_conents.product_id").
+    #   where("checkout_date IS NOT NULL").
+    #   order("value DESC").
+    #   group("orders.id").
+    #   first
+    #   first ? first.value : 0
   end
 end
-
-
-
-
-
-
-
-
-  

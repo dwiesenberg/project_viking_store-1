@@ -1,0 +1,8 @@
+h1 {
+  text-align: center;
+}
+#admin-navbar {
+  border: 2px solid #bbb;
+  text-align: center;
+  list-style-type: none;
+}

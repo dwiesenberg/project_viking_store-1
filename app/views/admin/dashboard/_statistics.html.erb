@@ -1,0 +1,34 @@
+<table class="table table-striped table-bordered">
+  <thead>
+    <tr>
+      <th>Item</th>
+      <th>Data</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Number of Orders</td>
+      <td>
+        <%= new_orders %>
+      </td>
+    </tr>
+    <tr>
+      <td>Total Revenue</td>
+      <td>
+        <%= number_to_currency(revenue) %>
+      </td>
+    </tr>
+    <tr>
+      <td>Average Order Value</td>
+      <td>
+        <%= new_orders > 0 ? number_to_currency( revenue / new_orders) : 0 %>
+      </td>
+    </tr>
+    <tr>
+      <td>Largest Order Value</td>
+      <td>
+        <%= number_to_currency( largest_order) %>
+      </td>
+    </tr>
+  </tbody>
+</table>
