@@ -29,7 +29,7 @@ class Admin::CategoriesController < AdminController
   end
 
   def update
-    if @category.update_attributes(whitelisted_category_params)
+    if @category.update_attributes(safe_category_params)
       flash[:success] = "Category updated."
       redirect_to admin_categories_path
     else
@@ -49,6 +49,10 @@ class Admin::CategoriesController < AdminController
   end
 
   private
+  def set_category
+    @category = Category.find(params[:id])
+  end
+
   def safe_category_params
     params.require(:category).permit(:name)
   end
